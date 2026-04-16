@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { withPrefix } from 'gatsby';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
 import { navDelay, loaderDelay } from '@utils';
@@ -147,10 +148,14 @@ const Hero = () => {
   );
   const six = (
     <div className="cta-group">
-      <a className="primary-link" href="/Wangdi_CV.pdf" target="_blank" rel="noreferrer">
+      <a
+        className="primary-link"
+        href={withPrefix('/Wangdi_CV.pdf')}
+        target="_blank"
+        rel="noreferrer">
         View CV
       </a>
-      <a className="secondary-link" href="/#case-studies">
+      <a className="secondary-link" href={withPrefix('/#case-studies')}>
         Explore Case Studies
       </a>
     </div>

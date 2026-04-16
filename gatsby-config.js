@@ -1,11 +1,13 @@
 const config = require('./src/config');
+const pathPrefix = '/-Wangdi-portfolio-v7';
 
 module.exports = {
+  pathPrefix,
   siteMetadata: {
     title: 'Wangdi',
     description:
       'Senior Forestry Officer focused on biodiversity, climate-responsive forest management, ecological research, and forest governance in Bhutan.',
-    siteUrl: 'https://wangdi-portfolio.example',
+    siteUrl: `https://wangdiues.github.io${pathPrefix}`,
     image: '/og.png',
     twitterUsername: '',
   },
