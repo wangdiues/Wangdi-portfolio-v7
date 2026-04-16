@@ -55,17 +55,17 @@ const Contact = () => {
 
   return (
     <StyledContactSection id="contact" ref={revealContainer}>
-      <h2 className="numbered-heading overline">What’s Next?</h2>
+      <h2 className="numbered-heading overline">Open to Collaboration</h2>
 
       <h2 className="title">Get In Touch</h2>
 
       <p>
-        Although I’m not currently looking for any new opportunities, my inbox is always open.
-        Whether you have a question or just want to say hi, I’ll try my best to get back to you!
+        For collaboration on biodiversity research, conservation planning, climate and forest
+        governance work, technical reviews, or speaking opportunities, reach out by email.
       </p>
 
       <a className="email-link" href={`mailto:${email}`}>
-        Say Hello
+        Email Wangdi
       </a>
     </StyledContactSection>
   );

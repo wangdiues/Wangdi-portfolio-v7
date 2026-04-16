@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import { StaticImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 import { srConfig } from '@config';
 import sr from '@utils/sr';
@@ -21,7 +20,7 @@ const StyledAboutSection = styled.section`
 const StyledText = styled.div`
   ul.skills-list {
     display: grid;
-    grid-template-columns: repeat(2, minmax(140px, 200px));
+    grid-template-columns: repeat(2, minmax(180px, 220px));
     grid-gap: 0 10px;
     padding: 0;
     margin: 20px 0 0 0;
@@ -46,70 +45,46 @@ const StyledText = styled.div`
     }
   }
 `;
-const StyledPic = styled.div`
-  position: relative;
-  max-width: 300px;
+const StyledProfilePanel = styled.div`
+  ${({ theme }) => theme.mixins.boxShadow};
+  height: fit-content;
+  padding: 28px 26px;
+  border-radius: var(--border-radius);
+  background: linear-gradient(180deg, rgba(22, 48, 42, 0.92), rgba(14, 31, 26, 0.92));
 
-  @media (max-width: 768px) {
-    margin: 50px auto 0;
-    width: 70%;
+  h3 {
+    margin: 0 0 20px;
+    color: var(--white);
+    font-size: var(--fz-xxl);
   }
 
-  .wrapper {
-    ${({ theme }) => theme.mixins.boxShadow};
+  .panel-group + .panel-group {
+    margin-top: 22px;
+    padding-top: 22px;
+    border-top: 1px solid var(--lightest-navy);
+  }
+
+  .panel-label {
     display: block;
-    position: relative;
-    width: 100%;
-    border-radius: var(--border-radius);
-    background-color: var(--green);
+    margin-bottom: 8px;
+    color: var(--green);
+    font-family: var(--font-mono);
+    font-size: var(--fz-xxs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
 
-    &:hover,
-    &:focus {
-      outline: 0;
-      transform: translate(-4px, -4px);
+  p,
+  li {
+    margin: 0;
+    color: var(--light-slate);
+    font-size: var(--fz-sm);
+    line-height: 1.7;
+  }
 
-      &:after {
-        transform: translate(8px, 8px);
-      }
-
-      .img {
-        filter: none;
-        mix-blend-mode: normal;
-      }
-    }
-
-    .img {
-      position: relative;
-      border-radius: var(--border-radius);
-      mix-blend-mode: multiply;
-      filter: grayscale(100%) contrast(1);
-      transition: var(--transition);
-    }
-
-    &:before,
-    &:after {
-      content: '';
-      display: block;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: var(--border-radius);
-      transition: var(--transition);
-    }
-
-    &:before {
-      top: 0;
-      left: 0;
-      background-color: var(--navy);
-      mix-blend-mode: screen;
-    }
-
-    &:after {
-      border: 2px solid var(--green);
-      top: 14px;
-      left: 14px;
-      z-index: -1;
-    }
+  ul {
+    padding-left: 18px;
+    margin: 0;
   }
 `;
 
@@ -125,7 +100,18 @@ const About = () => {
     sr.reveal(revealContainer.current, srConfig());
   }, []);
 
-  const skills = ['JavaScript (ES6+)', 'TypeScript', 'React', 'Eleventy', 'Node.js', 'WordPress'];
+  const skills = [
+    'QGIS',
+    'ArcGIS',
+    'Google Earth Engine',
+    'Python',
+    'R',
+    'Species Distribution Modeling',
+    'Occupancy Modeling',
+    'Camera Trap Analysis',
+    'Forest Inventory',
+    'Remote Sensing',
+  ];
 
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
@@ -135,33 +121,29 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              Hello! My name is Brittany and I enjoy creating things that live on the internet. My
-              interest in web development started back in 2012 when I decided to try editing custom
-              Tumblr themes — turns out hacking together a custom reblog button taught me a lot
-              about HTML &amp; CSS!
+              Wangdi is a public-sector forestry, biodiversity, and environmental management
+              professional working within Bhutan’s forest governance system. His work combines field
+              implementation, ecological analysis, policy-linked planning, and conservation program
+              delivery.
             </p>
 
             <p>
-              Fast-forward to today, and I’ve had the privilege of working at{' '}
-              <a href="https://us.mullenlowe.com/">an advertising agency</a>,{' '}
-              <a href="https://starry.com/">a start-up</a>,{' '}
-              <a href="https://www.apple.com/">a huge corporation</a>, and{' '}
-              <a href="https://scout.camd.northeastern.edu/">a student-led design studio</a>. My
-              main focus these days is building accessible, inclusive products and digital
-              experiences at <a href="https://upstatement.com/">Upstatement</a> for a variety of
-              clients.
+              He currently serves as Senior Forestry Officer in the NWFP Section, Forest Resources
+              Planning &amp; Management Division, after a merit-based promotion effective 1 January
+              2026. His earlier role in Sarpang focused on biodiversity monitoring, climate
+              assessment, protected area and corridor planning, and human-wildlife coexistence
+              strategy development.
             </p>
 
             <p>
-              I also recently{' '}
-              <a href="https://www.newline.co/courses/build-a-spotify-connected-app">
-                launched a course
-              </a>{' '}
-              that covers everything you need to build a web app with the Spotify API using Node
-              &amp; React.
+              The portfolio highlights work that links geospatial analysis, ecological evidence, and
+              management decisions across protected areas, corridors, and community-linked forest
+              stewardship. It is designed for collaborators, scholarship reviewers, institutions,
+              and conservation partners who need a clear view of Wangdi’s experience and technical
+              depth.
             </p>
 
-            <p>Here are a few technologies I’ve been working with recently:</p>
+            <p>Selected tools and methods:</p>
           </div>
 
           <ul className="skills-list">
@@ -169,18 +151,42 @@ const About = () => {
           </ul>
         </StyledText>
 
-        <StyledPic>
-          <div className="wrapper">
-            <StaticImage
-              className="img"
-              src="../../images/me.jpg"
-              width={500}
-              quality={95}
-              formats={['AUTO', 'WEBP', 'AVIF']}
-              alt="Headshot"
-            />
+        <StyledProfilePanel>
+          <h3>Selected Credentials</h3>
+
+          <div className="panel-group">
+            <span className="panel-label">Current Role</span>
+            <p>
+              Senior Forestry Officer, NWFP Section, Forest Resources Planning &amp; Management
+              Division
+            </p>
           </div>
-        </StyledPic>
+
+          <div className="panel-group">
+            <span className="panel-label">Recognition</span>
+            <ul>
+              <li>Merit-based promotion effective 1 January 2026</li>
+              <li>Three consecutive Outstanding performance ratings</li>
+              <li>Managed conservation programs exceeding Nu. 35 million</li>
+            </ul>
+          </div>
+
+          <div className="panel-group">
+            <span className="panel-label">Education</span>
+            <p>
+              BSc (Honours) in Forestry, First Class, College of Natural Resources, Royal University
+              of Bhutan
+            </p>
+          </div>
+
+          <div className="panel-group">
+            <span className="panel-label">Research Profile</span>
+            <p>
+              Published peer-reviewed work in biodiversity topics, with active manuscripts spanning
+              elephants, tigers, vegetation ecology, and ecosystem integrity.
+            </p>
+          </div>
+        </StyledProfilePanel>
       </div>
     </StyledAboutSection>
   );

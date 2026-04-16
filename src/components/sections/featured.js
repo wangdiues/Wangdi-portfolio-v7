@@ -1,10 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 import sr from '@utils/sr';
 import { srConfig } from '@config';
-import { Icon } from '@components/icons';
 import { usePrefersReducedMotion } from '@hooks';
 
 const StyledProjectsGrid = styled.ul`
@@ -71,18 +69,7 @@ const StyledProject = styled.li`
         }
       }
     }
-    .project-links {
-      justify-content: flex-end;
-      margin-left: 0;
-      margin-right: -10px;
-
-      @media (max-width: 768px) {
-        justify-content: flex-start;
-        margin-left: -10px;
-        margin-right: 0;
-      }
-    }
-    .project-image {
+    .project-panel {
       grid-column: 1 / 8;
 
       @media (max-width: 768px) {
@@ -208,97 +195,40 @@ const StyledProject = styled.li`
     }
   }
 
-  .project-links {
-    display: flex;
-    align-items: center;
-    position: relative;
-    margin-top: 10px;
-    margin-left: -10px;
-    color: var(--lightest-slate);
-
-    a {
-      ${({ theme }) => theme.mixins.flexCenter};
-      padding: 10px;
-
-      &.external {
-        svg {
-          width: 22px;
-          height: 22px;
-          margin-top: -4px;
-        }
-      }
-
-      svg {
-        width: 20px;
-        height: 20px;
-      }
-    }
-
-    .cta {
-      ${({ theme }) => theme.mixins.smallButton};
-      margin: 10px;
-    }
-  }
-
-  .project-image {
+  .project-panel {
     ${({ theme }) => theme.mixins.boxShadow};
     grid-column: 6 / -1;
     grid-row: 1 / -1;
     position: relative;
     z-index: 1;
+    padding: 32px;
+    border-radius: var(--border-radius);
+    background: linear-gradient(180deg, rgba(39, 69, 59, 0.95), rgba(22, 48, 42, 0.88));
 
     @media (max-width: 768px) {
       grid-column: 1 / -1;
-      height: 100%;
-      opacity: 0.25;
+      opacity: 1;
+      padding: 24px;
     }
 
-    a {
-      width: 100%;
-      height: 100%;
-      background-color: var(--green);
-      border-radius: var(--border-radius);
-      vertical-align: middle;
-
-      &:hover,
-      &:focus {
-        background: transparent;
-        outline: 0;
-
-        &:before,
-        .img {
-          background: transparent;
-          filter: none;
-        }
-      }
-
-      &:before {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 3;
-        transition: var(--transition);
-        background-color: var(--navy);
-        mix-blend-mode: screen;
-      }
+    .panel-label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--green);
+      font-family: var(--font-mono);
+      font-size: var(--fz-xxs);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
-    .img {
-      border-radius: var(--border-radius);
-      mix-blend-mode: multiply;
-      filter: grayscale(100%) contrast(1) brightness(90%);
+    .panel-value {
+      color: var(--white);
+      font-size: var(--fz-lg);
+      line-height: 1.5;
+    }
 
-      @media (max-width: 768px) {
-        object-fit: cover;
-        width: auto;
-        height: 100%;
-        filter: grayscale(100%) contrast(1) brightness(50%);
-      }
+    .panel-item + .panel-item {
+      margin-top: 24px;
     }
   }
 `;
@@ -307,22 +237,18 @@ const Featured = () => {
   const data = useStaticQuery(graphql`
     {
       featured: allMarkdownRemark(
-        filter: { fileAbsolutePath: { regex: "/content/featured/" } }
+        filter: { fileAbsolutePath: { regex: "/content/case-studies/" } }
         sort: { fields: [frontmatter___date], order: ASC }
       ) {
         edges {
           node {
             frontmatter {
               title
-              cover {
-                childImageSharp {
-                  gatsbyImageData(width: 700, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
-                }
-              }
-              tech
-              github
+              region
+              focus
+              impact
+              methods
               external
-              cta
             }
             html
           }
@@ -346,26 +272,25 @@ const Featured = () => {
   }, []);
 
   return (
-    <section id="projects">
+    <section id="case-studies">
       <h2 className="numbered-heading" ref={revealTitle}>
-        Some Things I’ve Built
+        Selected Case Studies
       </h2>
 
       <StyledProjectsGrid>
         {featuredProjects &&
           featuredProjects.map(({ node }, i) => {
             const { frontmatter, html } = node;
-            const { external, title, tech, github, cover, cta } = frontmatter;
-            const image = getImage(cover);
+            const { external, title, region, focus, impact, methods } = frontmatter;
 
             return (
               <StyledProject key={i} ref={el => (revealProjects.current[i] = el)}>
                 <div className="project-content">
                   <div>
-                    <p className="project-overline">Featured Project</p>
+                    <p className="project-overline">Flagship Case Study</p>
 
                     <h3 className="project-title">
-                      <a href={external}>{title}</a>
+                      {external ? <a href={external}>{title}</a> : <span>{title}</span>}
                     </h3>
 
                     <div
@@ -373,38 +298,31 @@ const Featured = () => {
                       dangerouslySetInnerHTML={{ __html: html }}
                     />
 
-                    {tech.length && (
+                    {methods && methods.length > 0 && (
                       <ul className="project-tech-list">
-                        {tech.map((tech, i) => (
-                          <li key={i}>{tech}</li>
+                        {methods.map((method, index) => (
+                          <li key={index}>{method}</li>
                         ))}
                       </ul>
                     )}
-
-                    <div className="project-links">
-                      {cta && (
-                        <a href={cta} aria-label="Course Link" className="cta">
-                          Learn More
-                        </a>
-                      )}
-                      {github && (
-                        <a href={github} aria-label="GitHub Link">
-                          <Icon name="GitHub" />
-                        </a>
-                      )}
-                      {external && !cta && (
-                        <a href={external} aria-label="External Link" className="external">
-                          <Icon name="External" />
-                        </a>
-                      )}
-                    </div>
                   </div>
                 </div>
 
-                <div className="project-image">
-                  <a href={external ? external : github ? github : '#'}>
-                    <GatsbyImage image={image} alt={title} className="img" />
-                  </a>
+                <div className="project-panel">
+                  <div className="panel-item">
+                    <span className="panel-label">Geographic Scope</span>
+                    <div className="panel-value">{region}</div>
+                  </div>
+
+                  <div className="panel-item">
+                    <span className="panel-label">Focus</span>
+                    <div className="panel-value">{focus}</div>
+                  </div>
+
+                  <div className="panel-item">
+                    <span className="panel-label">Outcome</span>
+                    <div className="panel-value">{impact}</div>
+                  </div>
                 </div>
               </StyledProject>
             );

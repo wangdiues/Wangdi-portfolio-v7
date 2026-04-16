@@ -9,3 +9,5 @@ package-lock.json
 .DS_Store
 
 .vscode/
+develop.stdout.log
+develop.stderr.log

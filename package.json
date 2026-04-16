@@ -1,24 +1,22 @@
 {
-  "name": "v4",
-  "description": "Personal Website V4",
+  "name": "wangdi-portfolio-v7",
+  "description": "Professional portfolio for Wangdi",
   "version": "1.0.0",
-  "author": "Brittany Chiang <brittany.chiang@gmail.com>",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bchiang7/v4"
-  },
+  "private": true,
+  "author": "Wangdi <wangdiues@gmail.com>",
   "keywords": [
     "gatsby"
   ],
   "license": "MIT",
   "browserslist": "> 0.25%, not dead",
   "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
+    "build": "node --openssl-legacy-provider ./node_modules/gatsby/cli.js build",
+    "develop": "node --openssl-legacy-provider ./node_modules/gatsby/cli.js develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
+    "serve": "node --openssl-legacy-provider ./node_modules/gatsby/cli.js serve",
+    "clean": "node --openssl-legacy-provider ./node_modules/gatsby/cli.js clean",
+    "postinstall": "node scripts/fix-postcss-exports.js",
     "prepare": "husky install",
     "lint-staged": "lint-staged"
   },

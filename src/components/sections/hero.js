@@ -32,17 +32,68 @@ const StyledHeroSection = styled.section`
   h3 {
     margin-top: 5px;
     color: var(--slate);
-    line-height: 0.9;
+    line-height: 1.05;
   }
 
   p {
     margin: 20px 0 0;
-    max-width: 540px;
+    max-width: 620px;
   }
 
-  .email-link {
+  .cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 40px;
+  }
+
+  .primary-link {
     ${({ theme }) => theme.mixins.bigButton};
-    margin-top: 50px;
+  }
+
+  .secondary-link {
+    ${({ theme }) => theme.mixins.smallButton};
+  }
+
+  .impact-strip {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(120px, 1fr));
+    gap: 14px;
+    width: 100%;
+    max-width: 760px;
+    margin-top: 40px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(2, minmax(140px, 1fr));
+    }
+
+    @media (max-width: 420px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .impact-item {
+    padding: 18px 18px 16px;
+    border: 1px solid var(--lightest-navy);
+    border-radius: var(--border-radius);
+    background: rgba(22, 48, 42, 0.45);
+  }
+
+  .impact-value {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--white);
+    font-size: clamp(24px, 4vw, 30px);
+    font-weight: 600;
+  }
+
+  .impact-label {
+    display: block;
+    color: var(--light-slate);
+    font-family: var(--font-mono);
+    font-size: var(--fz-xxs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 `;
 
@@ -59,33 +110,53 @@ const Hero = () => {
     return () => clearTimeout(timeout);
   }, []);
 
-  const one = <h1>Hi, my name is</h1>;
-  const two = <h2 className="big-heading">Brittany Chiang.</h2>;
-  const three = <h3 className="big-heading">I build things for the web.</h3>;
+  const one = <h1>Professional Portfolio</h1>;
+  const two = <h2 className="big-heading">Wangdi.</h2>;
+  const three = (
+    <h3 className="big-heading">
+      Senior Forestry Officer working at the intersection of biodiversity, climate, and forest
+      governance.
+    </h3>
+  );
   const four = (
-    <>
-      <p>
-        I’m a software engineer specializing in building (and occasionally designing) exceptional
-        digital experiences. Currently, I’m focused on building accessible, human-centered products
-        at{' '}
-        <a href="https://upstatement.com/" target="_blank" rel="noreferrer">
-          Upstatement
-        </a>
-        .
-      </p>
-    </>
+    <p>
+      Public-sector forestry and environmental management professional with 5+ years of experience
+      in Bhutan’s forest governance system, focused on evidence-based conservation planning, NWFP
+      governance, GIS and remote sensing, ecological research, and climate-responsive management.
+    </p>
   );
   const five = (
-    <a
-      className="email-link"
-      href="https://www.newline.co/courses/build-a-spotify-connected-app"
-      target="_blank"
-      rel="noreferrer">
-      Check out my course!
-    </a>
+    <div className="impact-strip">
+      <div className="impact-item">
+        <span className="impact-value">5+</span>
+        <span className="impact-label">Years in public-sector forestry</span>
+      </div>
+      <div className="impact-item">
+        <span className="impact-value">Nu. 35M+</span>
+        <span className="impact-label">Conservation budgets managed</span>
+      </div>
+      <div className="impact-item">
+        <span className="impact-value">100+</span>
+        <span className="impact-label">Species documented</span>
+      </div>
+      <div className="impact-item">
+        <span className="impact-value">3</span>
+        <span className="impact-label">Consecutive Outstanding ratings</span>
+      </div>
+    </div>
+  );
+  const six = (
+    <div className="cta-group">
+      <a className="primary-link" href="/Wangdi_CV.pdf" target="_blank" rel="noreferrer">
+        View CV
+      </a>
+      <a className="secondary-link" href="/#case-studies">
+        Explore Case Studies
+      </a>
+    </div>
   );
 
-  const items = [one, two, three, four, five];
+  const items = [one, two, three, four, five, six];
 
   return (
     <StyledHeroSection>
