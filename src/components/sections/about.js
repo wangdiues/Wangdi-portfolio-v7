@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { StaticImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 import { srConfig } from '@config';
 import sr from '@utils/sr';
@@ -51,6 +52,21 @@ const StyledProfilePanel = styled.div`
   padding: 28px 26px;
   border-radius: var(--border-radius);
   background: linear-gradient(180deg, rgba(22, 48, 42, 0.92), rgba(14, 31, 26, 0.92));
+
+  .photo-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+
+    .gatsby-image-wrapper {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 3px solid var(--green);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+  }
 
   h3 {
     margin: 0 0 20px;
@@ -152,6 +168,17 @@ const About = () => {
         </StyledText>
 
         <StyledProfilePanel>
+          <div className="photo-wrapper">
+            <StaticImage
+              src="../../images/profile.jpg"
+              width={140}
+              height={140}
+              quality={90}
+              alt="Wangdi"
+              formats={['auto', 'webp', 'avif']}
+              imgStyle={{ borderRadius: '50%' }}
+            />
+          </div>
           <h3>Selected Credentials</h3>
 
           <div className="panel-group">

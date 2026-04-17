@@ -5,6 +5,7 @@ title: 'Forestry / Biodiversity Officer'
 company: 'Department of Forests & Park Services'
 location: 'Head, Nature Conservation Section, Divisional Forest Office, Sarpang'
 range: 'January 2022 - February 2026'
+url: ''
 ---
 
 - Served as focal officer for the IKI Living Landscape Project and supported Bhutan for Life conservation interventions.

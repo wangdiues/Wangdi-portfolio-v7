@@ -42,9 +42,6 @@ const StyledProject = styled.li`
       grid-column: 7 / -1;
       text-align: right;
 
-      @media (max-width: 1080px) {
-        grid-column: 5 / -1;
-      }
       @media (max-width: 768px) {
         grid-column: 1 / -1;
         padding: 40px 40px 30px;
@@ -70,7 +67,7 @@ const StyledProject = styled.li`
       }
     }
     .project-panel {
-      grid-column: 1 / 8;
+      grid-column: 1 / 7;
 
       @media (max-width: 768px) {
         grid-column: 1 / -1;
@@ -82,10 +79,6 @@ const StyledProject = styled.li`
     position: relative;
     grid-column: 1 / 7;
     grid-row: 1 / -1;
-
-    @media (max-width: 1080px) {
-      grid-column: 1 / 9;
-    }
 
     @media (max-width: 768px) {
       display: flex;
@@ -197,7 +190,7 @@ const StyledProject = styled.li`
 
   .project-panel {
     ${({ theme }) => theme.mixins.boxShadow};
-    grid-column: 6 / -1;
+    grid-column: 7 / -1;
     grid-row: 1 / -1;
     position: relative;
     z-index: 1;

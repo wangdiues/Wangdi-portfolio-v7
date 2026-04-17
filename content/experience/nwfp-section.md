@@ -5,6 +5,7 @@ title: 'Senior Forestry Officer'
 company: 'Department of Forests & Park Services'
 location: 'NWFP Section, Forest Resources Planning & Management Division, Bhutan'
 range: 'March 2026 - Present'
+url: ''
 ---
 
 - Administer national-level non-wood forest product allocation processes to support equitable distribution and regulatory compliance.
