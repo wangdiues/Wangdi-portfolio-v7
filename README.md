@@ -24,9 +24,22 @@ Professional portfolio implementation for Wangdi, built on a reworked Gatsby `v4
    ```sh
    yarn build
    ```
+4. Build for GitHub Pages
+   ```sh
+   yarn build:pages
+   ```
+
+## Deployment
+
+The site is configured for GitHub Pages at:
+
+```txt
+https://wangdiues.github.io/Wangdi-portfolio-v7/
+```
+
+The Pages workflow builds with `yarn build:pages`, so Gatsby's `pathPrefix` in `gatsby-config.js` must match the repository name: `/Wangdi-portfolio-v7`.
 
 ## Notes
 
-- Update `siteUrl` in [gatsby-config.js](/D:/Portfolio/v7/gatsby-config.js:1) before deployment.
-- Add final social profile links in [src/config.js](/D:/Portfolio/v7/src/config.js:1) when the LinkedIn and ResearchGate URLs are available.
+- Add final ResearchGate or other social profile links in `src/config.js` when they are available.
 - Replace or add custom imagery if Wangdi-specific photos, maps, or field visuals become available.
